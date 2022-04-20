@@ -1,10 +1,28 @@
-import socket
-
-for port in range(1, 9000):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    result = sock.connect_ex(("192.168.0.250", port))
-    if result == 0:
-        print("Port " + str(port) + " is open")
-    else:
-        print("Port " + str(port) +  " is closed")
-    sock.close()
+free socket import *
+def conScan(tgtHost, tgtPort):
+        try:
+            connskt = socket(AF_INET, SOCK_STREAM)
+            connskt.connect((tgtHost, tgtPort))
+            print('[+]%d/tcp open'% tgtPort)
+            connskt.close()
+        except:
+            print('[-]%d/tcp closed'% tgtPort)
+            
+def portScan(tgtHost, tgtPorts):
+    try:
+        tgtIP = gethostbyname(tgtHost)
+    except:
+        print('[-] Cannot resolve %s ' % tgtHost)
+        return
+    try:
+        tgtName = gethostbyaddr(tgtIP)
+        print('\n[+] Scan result of: %s ' % tgtIP)
+    except:
+        print('\n[+] Scan result of: %s ' % tgtIP)
+    setdefaulttimeout(1)
+    for tgtPort in tgtPorts:
+        print('Scanning Port: %d'% tgtPort)
+        conScan(tgtHost, int9tgtPort))
+        
+    if __name__ == '__main__':
+        portScan('google.com', [80, 22])      
